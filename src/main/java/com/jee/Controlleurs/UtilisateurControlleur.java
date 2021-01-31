@@ -7,6 +7,7 @@ import com.jee.Gestionnaires.UtilisateurGestionnaire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -22,8 +23,13 @@ public class UtilisateurControlleur {
     @Autowired
     private ProfesseurGestionnaire professeurGestionnaire;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+
     @PostMapping("/inscription")
     public ResponseEntity<?> ajouterUtilisateur(@Valid @RequestBody Utilisateur utilisateur){
+        utilisateur.setPassword(passwordEncoder.encode(utilisateur.getPassword()));
         if (utilisateur.getType_utilisateur() == PROFESSEUR && professeurGestionnaire.isExistByEmail(utilisateur.getEmail())){
             utilisateurGestionnaire.ajouterUtilisateur(utilisateur);
         }else if (utilisateur.getType_utilisateur() == ETUDIANT || utilisateur.getType_utilisateur() == ADMINISTRATEUR){
