@@ -13,8 +13,7 @@ import javax.validation.Valid;
 
 import java.util.Collection;
 
-import static com.jee.Beans.Type_Utilisateur.ETUDIANT;
-import static com.jee.Beans.Type_Utilisateur.PROFESSEUR;
+import static com.jee.Beans.Type_Utilisateur.*;
 
 @RestController
 public class UtilisateurControlleur {
@@ -27,7 +26,7 @@ public class UtilisateurControlleur {
     public ResponseEntity<?> ajouterUtilisateur(@Valid @RequestBody Utilisateur utilisateur){
         if (utilisateur.getType_utilisateur() == PROFESSEUR && professeurGestionnaire.isExistByEmail(utilisateur.getEmail())){
             utilisateurGestionnaire.ajouterUtilisateur(utilisateur);
-        }else if (utilisateur.getType_utilisateur() == ETUDIANT){
+        }else if (utilisateur.getType_utilisateur() == ETUDIANT || utilisateur.getType_utilisateur() == ADMINISTRATEUR){
             utilisateurGestionnaire.ajouterUtilisateur(utilisateur);
         }else {
             return new ResponseEntity<>("Professeur n'existe pas ", HttpStatus.NOT_ACCEPTABLE);
