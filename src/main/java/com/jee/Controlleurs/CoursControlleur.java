@@ -24,6 +24,7 @@ public class CoursControlleur {
         return cours;
     }
     @GetMapping("/cours/{id_cours}")
+    @RolesAllowed({"ETUDIANT", "ADMINISTRATEUR"})
     public ResponseEntity<?> getCoursById(@PathVariable Long id_cours){
         return new ResponseEntity<>(coursGestionnaire.getCoursById(id_cours), HttpStatus.OK);
     }
@@ -36,12 +37,14 @@ public class CoursControlleur {
     }
 
     @PutMapping("/modifierCours")
+    @RolesAllowed({"ADMINISTRATEUR"})
     public ResponseEntity<?> modifierCours(@Valid @RequestBody Cours cours){
         coursGestionnaire.modifierCours(cours);
         return new ResponseEntity<>(cours,HttpStatus.OK);
     }
 
     @DeleteMapping("/supprimerCours/{id_cours}")
+    @RolesAllowed({"ADMINISTRATEUR"})
     public ResponseEntity<?> supprimerCours(@PathVariable Long id_cours){
         coursGestionnaire.supprimerCours(id_cours);
         return new ResponseEntity<>("Cours supprimer avec succes",HttpStatus.OK);

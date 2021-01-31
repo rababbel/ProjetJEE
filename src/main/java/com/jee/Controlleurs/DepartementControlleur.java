@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.security.RolesAllowed;
+
 @RestController
 public class DepartementControlleur {
 
@@ -16,6 +18,7 @@ public class DepartementControlleur {
     private DepartementGestionnaire departementGestionnaire;
 
     @GetMapping("/departement/{id_departement}")
+    @RolesAllowed({"ADMINISTRATEUR"})
     public ResponseEntity<?> getDepartement(@PathVariable Long id_departement){
         Departement departement = departementGestionnaire.getDepartementById(id_departement);
         return new ResponseEntity<Departement>(departement, HttpStatus.OK);

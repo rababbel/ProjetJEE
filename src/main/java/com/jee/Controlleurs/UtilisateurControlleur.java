@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 
 import java.util.Collection;
@@ -28,6 +29,7 @@ public class UtilisateurControlleur {
 
 
     @PostMapping("/inscription")
+    @RolesAllowed({"PROFESSEUR", "ETUDIANT", "ADMINISTRATEUR"})
     public ResponseEntity<?> ajouterUtilisateur(@Valid @RequestBody Utilisateur utilisateur){
         utilisateur.setPassword(passwordEncoder.encode(utilisateur.getPassword()));
         if (utilisateur.getType_utilisateur() == PROFESSEUR && professeurGestionnaire.isExistByEmail(utilisateur.getEmail())){

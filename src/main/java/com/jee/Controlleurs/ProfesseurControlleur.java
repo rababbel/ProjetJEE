@@ -14,7 +14,7 @@ public class ProfesseurControlleur {
     private ProfesseurGestionnaire professeurGestionnaire;
 
     @GetMapping("/professeurs")
-    public ResponseEntity<?> getAllProfesseurs(){
+    private ResponseEntity<?> getAllProfesseurs(){
         return new ResponseEntity<>(professeurGestionnaire.getAllProfesseur(), HttpStatus.OK);
     }
 }
