@@ -8,9 +8,21 @@ public class Note_Absence {
     @Id
     private EtudiantModule etudiantModule;
 
-    private Long note;
+    private Float note;
     private Long absence;
 
+    public Note_Absence(EtudiantModule etudiantModule, Float note) {
+        this.etudiantModule = etudiantModule;
+        this.note = note;
+    }
+
+    public Note_Absence(EtudiantModule etudiantModule, Long absence) {
+        this.etudiantModule = etudiantModule;
+        this.absence = absence;
+    }
+
+    public Note_Absence() {
+    }
 
     public EtudiantModule getEtudiantModule() {
         return etudiantModule;
@@ -20,11 +32,11 @@ public class Note_Absence {
         this.etudiantModule = etudiantModule;
     }
 
-    public Long getNote() {
+    public Float getNote() {
         return note;
     }
 
-    public void setNote(Long note) {
+    public void setNote(Float note) {
         this.note = note;
     }
 
