@@ -1,5 +1,5 @@
 package com.jee.Beans;
 
-public enum Type_Utilisateur {
+public enum ROLE {
     PROFESSEUR, ETUDIANT, ADMINISTRATEUR
 }

@@ -1,7 +1,7 @@
 package com.jee.Gestionnaires;
 
 import com.jee.Beans.GeUserDetail;
-import com.jee.Beans.Type_Utilisateur;
+import com.jee.Beans.ROLE;
 import com.jee.Beans.Utilisateur;
 import com.jee.Repositories.UtilisateurDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ public class GeUserDetailService implements UserDetailsService {
             Utilisateur utilisateur = new Utilisateur();
             utilisateur.setEmail(email);
             utilisateur.setPassword(passwordEncoder.encode("admin"));
-            utilisateur.setType_utilisateur(Type_Utilisateur.ADMINISTRATEUR);
+            utilisateur.setRole(ROLE.ADMINISTRATEUR);
             return new GeUserDetail(utilisateur);
         }
         Utilisateur utilisateur = utilisateurDAO.findByEmail(email);

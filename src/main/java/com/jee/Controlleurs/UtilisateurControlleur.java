@@ -1,6 +1,5 @@
 package com.jee.Controlleurs;
 
-import com.jee.Beans.Type_Utilisateur;
 import com.jee.Beans.Utilisateur;
 import com.jee.Gestionnaires.ProfesseurGestionnaire;
 import com.jee.Gestionnaires.UtilisateurGestionnaire;
@@ -15,7 +14,7 @@ import javax.validation.Valid;
 
 import java.util.Collection;
 
-import static com.jee.Beans.Type_Utilisateur.*;
+import static com.jee.Beans.ROLE.*;
 
 @RestController
 public class UtilisateurControlleur {
@@ -32,9 +31,9 @@ public class UtilisateurControlleur {
     @RolesAllowed({"PROFESSEUR", "ETUDIANT", "ADMINISTRATEUR"})
     public ResponseEntity<?> ajouterUtilisateur(@Valid @RequestBody Utilisateur utilisateur){
         utilisateur.setPassword(passwordEncoder.encode(utilisateur.getPassword()));
-        if (utilisateur.getType_utilisateur() == PROFESSEUR && professeurGestionnaire.isExistByEmail(utilisateur.getEmail())){
+        if (utilisateur.getRole() == PROFESSEUR && professeurGestionnaire.isExistByEmail(utilisateur.getEmail())){
             utilisateurGestionnaire.ajouterUtilisateur(utilisateur);
-        }else if (utilisateur.getType_utilisateur() == ETUDIANT || utilisateur.getType_utilisateur() == ADMINISTRATEUR){
+        }else if (utilisateur.getRole() == ETUDIANT || utilisateur.getRole() == ADMINISTRATEUR){
             utilisateurGestionnaire.ajouterUtilisateur(utilisateur);
         }else {
             return new ResponseEntity<>("Professeur n'existe pas ", HttpStatus.NOT_ACCEPTABLE);

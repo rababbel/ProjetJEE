@@ -11,7 +11,7 @@ public class Utilisateur extends Personne{
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private Type_Utilisateur type_utilisateur;
+    private ROLE role;
 
     @OneToMany(mappedBy = "etudiantModule.utilisateur")
     private List<Note_Absence> notes_absences = new ArrayList<Note_Absence>();
@@ -20,10 +20,10 @@ public class Utilisateur extends Personne{
         super();
     }
 
-    public Utilisateur(Long id, String nom, String prenom, String email, String tel, String password, Type_Utilisateur type_utilisateur) {
+    public Utilisateur(Long id, String nom, String prenom, String email, String tel, String password, ROLE ROLE) {
         super(id, nom, prenom, email, tel);
         this.password = password;
-        this.type_utilisateur = type_utilisateur;
+        this.role = role;
     }
 
     public String getPassword() {
@@ -34,12 +34,12 @@ public class Utilisateur extends Personne{
         this.password = password;
     }
 
-    public Type_Utilisateur getType_utilisateur() {
-        return type_utilisateur;
+    public ROLE getRole() {
+        return role;
     }
 
-    public void setType_utilisateur(Type_Utilisateur type_utilisateur) {
-        this.type_utilisateur = type_utilisateur;
+    public void setRole(ROLE role) {
+        this.role = role;
     }
 
     public List<Note_Absence> getNotes_absences() {

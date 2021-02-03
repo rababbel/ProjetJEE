@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.security.RolesAllowed;
 
 @RestController
 public class LoginControlleurs {
@@ -43,7 +42,7 @@ public class LoginControlleurs {
 
         final GeUserDetail userDetail = (GeUserDetail) geUserDetailService.loadUserByUsername(authenticationRequest.getEmail());
         final String jwt = jwtUtil.generateToken(userDetail);
-        AuthenticationResponse authenticationResponse = new AuthenticationResponse(jwt, userDetail.getUtilisateur().getType_utilisateur());
+        AuthenticationResponse authenticationResponse = new AuthenticationResponse(jwt, userDetail.getUtilisateur().getRole());
         return  new ResponseEntity<>(authenticationResponse, HttpStatus.OK);
     }
 }

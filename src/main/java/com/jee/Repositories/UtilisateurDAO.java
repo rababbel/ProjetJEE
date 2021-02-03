@@ -1,6 +1,5 @@
 package com.jee.Repositories;
 
-import com.jee.Beans.Type_Utilisateur;
 import com.jee.Beans.Utilisateur;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;

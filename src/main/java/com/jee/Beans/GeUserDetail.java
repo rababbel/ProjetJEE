@@ -17,7 +17,7 @@ public class GeUserDetail implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(utilisateur.getType_utilisateur().toString());
+        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(utilisateur.getRole().toString());
         ArrayList<SimpleGrantedAuthority> authorities = new ArrayList<>();
         authorities.add(authority);
         return authorities;

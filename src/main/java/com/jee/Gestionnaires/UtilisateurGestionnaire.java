@@ -1,6 +1,5 @@
 package com.jee.Gestionnaires;
 
-import com.jee.Beans.Type_Utilisateur;
 import com.jee.Beans.Utilisateur;
 import com.jee.Repositories.UtilisateurDAO;
 import org.springframework.beans.factory.annotation.Autowired;
