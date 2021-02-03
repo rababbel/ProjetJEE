@@ -28,7 +28,6 @@ public class UtilisateurControlleur {
 
 
     @PostMapping("/inscription")
-    @RolesAllowed({"PROFESSEUR", "ETUDIANT", "ADMINISTRATEUR"})
     public ResponseEntity<?> ajouterUtilisateur(@Valid @RequestBody Utilisateur utilisateur){
         utilisateur.setPassword(passwordEncoder.encode(utilisateur.getPassword()));
         if (utilisateur.getRole() == PROFESSEUR && professeurGestionnaire.isExistByEmail(utilisateur.getEmail())){
@@ -42,18 +41,21 @@ public class UtilisateurControlleur {
     }
 
     @PutMapping("/modifierProfil")
+    @RolesAllowed({"PROFESSEUR", "ETUDIANT", "ADMINISTRATEUR"})
     public ResponseEntity<?> modifierUtilisateur(@Valid @RequestBody Utilisateur utilisateur){
         utilisateurGestionnaire.modifierUtilisateur(utilisateur);
         return new ResponseEntity<>(utilisateur,HttpStatus.OK);
     }
 
     @DeleteMapping("/supprimerUtilisateur/{id}")
+    @RolesAllowed({"ADMINISTRATEUR"})
     public ResponseEntity<?> supprimerUtilisateur(@PathVariable Long id){
         utilisateurGestionnaire.supprimerUtilisateur(id);
         return new ResponseEntity<>("utilisateur supprimer avec succes", HttpStatus.OK);
     }
 
     @GetMapping("/utilisateurs")
+    @RolesAllowed({"ADMINISTRATEUR"})
     public Collection<Utilisateur> getAllUtilisateurs(){
         Collection<Utilisateur> utilisateurs = utilisateurGestionnaire.getAllUtilisateurs();
 
@@ -61,11 +63,13 @@ public class UtilisateurControlleur {
     }
 
     @GetMapping("/utilisateur/{CNI}")
+    @RolesAllowed({"ADMINISTRATEUR"})
     public ResponseEntity<?> getUtilisateurByCNI(@PathVariable Long CNI){
         Utilisateur utilisateur = utilisateurGestionnaire.getUtilisateurById(CNI);
         return new ResponseEntity<Utilisateur>(utilisateur,HttpStatus.OK);
     }
     @GetMapping("/utilisateur/{email}")
+    @RolesAllowed({"ADMINISTRATEUR"})
     public ResponseEntity<?> getUtilisateurByEmail(@PathVariable String email){
         Utilisateur utilisateur = utilisateurGestionnaire.getUtilisateurByEmail(email);
         return new ResponseEntity<Utilisateur>(utilisateur,HttpStatus.OK);
