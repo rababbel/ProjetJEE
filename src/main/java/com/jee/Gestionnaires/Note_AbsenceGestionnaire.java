@@ -16,6 +16,7 @@ public class Note_AbsenceGestionnaire {
     private Note_AbsenceDAO note_absenceDAO;
 
     public void ajouterNoteAbsence(Note_Absence note_absence){
+
         note_absenceDAO.save(note_absence);
     }
 
@@ -23,8 +24,14 @@ public class Note_AbsenceGestionnaire {
         note_absenceDAO.save(note_absence);
     }
 
-    public List<Note_Absence> getAllNoteAbsenceByEtudiantModule(EtudiantModule etudiantModule){
-        return (List<Note_Absence>) note_absenceDAO.findAllById((Iterable<EtudiantModule>) etudiantModule);
+    public List<Note_Absence> getAllByEtudiant(Long id_etudiant){
+        List<Note_Absence> note_absences = note_absenceDAO.getAllByEtudiant(id_etudiant);
+        return note_absences;
+    }
+
+    public List<Note_Absence> getAllByModule(Long id_module){
+        List<Note_Absence> note_absences = note_absenceDAO.getAllByModule(id_module);
+        return note_absences;
     }
 
     public Optional<Note_Absence> getNoteAbsenceById(EtudiantModule etudiantModule){

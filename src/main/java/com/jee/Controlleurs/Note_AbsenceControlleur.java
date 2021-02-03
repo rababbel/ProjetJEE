@@ -33,15 +33,22 @@ public class Note_AbsenceControlleur {
         return new ResponseEntity<Note_Absence>(note_absence,HttpStatus.OK);
     }
 
-    @GetMapping("/NotesAbsences/{etudiantModule}")
-    @RolesAllowed({"PROFESSEUR", "ETUDIANT", "ADMINISTRATEUR"})
-    public Collection<Note_Absence> getAllNoteAbsenceByEtudiantModule(EtudiantModule etudiantModule){
-        Collection<Note_Absence> note_absences = note_absenceGestionnaire.getAllNoteAbsenceByEtudiantModule(etudiantModule);
+    @GetMapping("/noteAbsenceEtudiant/{id_etudiant}")
+    @RolesAllowed({"ETUDIANT"})
+    public Collection<Note_Absence> getAllNoteAbsenceByEtudiant(@PathVariable Long id_etudiant){
+        Collection<Note_Absence> note_absences = note_absenceGestionnaire.getAllByEtudiant(id_etudiant);
         return note_absences;
     }
 
 
-    @DeleteMapping("/supprimerNoteModule/{etudiantModule}")
+    @GetMapping("/noteAbsenceModule/{id_module}")
+    @RolesAllowed({"ADMINISTRATEUR","PROFESSEUR"})
+    public Collection<Note_Absence> getAllNoteAbsenceByModule(@PathVariable Long id_module){
+        Collection<Note_Absence> note_absences = note_absenceGestionnaire.getAllByModule(id_module);
+        return note_absences;
+    }
+
+    @DeleteMapping("/supprimerNoteAbsence/{etudiantModule}")
     @RolesAllowed({"ADMINISTRATEUR"})
     public ResponseEntity<?> supprimerNoteAbsence(EtudiantModule etudiantModule){
         note_absenceGestionnaire.deleteNoteAbsence(etudiantModule);
