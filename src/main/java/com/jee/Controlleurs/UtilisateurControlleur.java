@@ -30,9 +30,9 @@ public class UtilisateurControlleur {
     @PostMapping("/inscription")
     public ResponseEntity<?> ajouterUtilisateur(@Valid @RequestBody Utilisateur utilisateur){
         utilisateur.setPassword(passwordEncoder.encode(utilisateur.getPassword()));
-        if (utilisateur.getRole() == PROFESSEUR && professeurGestionnaire.isExistByEmail(utilisateur.getEmail())){
+        if (utilisateur.getRole() == ROLE_PROFESSEUR && professeurGestionnaire.isExistByEmail(utilisateur.getEmail())){
             utilisateurGestionnaire.ajouterUtilisateur(utilisateur);
-        }else if (utilisateur.getRole() == ETUDIANT || utilisateur.getRole() == ADMINISTRATEUR){
+        }else if (utilisateur.getRole() == ROLE_ETUDIANT || utilisateur.getRole() == ROLE_ADMINISTRATEUR){
             utilisateurGestionnaire.ajouterUtilisateur(utilisateur);
         }else {
             return new ResponseEntity<>("Professeur n'existe pas ", HttpStatus.NOT_ACCEPTABLE);

@@ -26,7 +26,7 @@ public class GeUserDetailService implements UserDetailsService {
             Utilisateur utilisateur = new Utilisateur();
             utilisateur.setEmail(email);
             utilisateur.setPassword(passwordEncoder.encode("admin"));
-            utilisateur.setRole(ROLE.ADMINISTRATEUR);
+            utilisateur.setRole(ROLE.ROLE_ADMINISTRATEUR);
             return new GeUserDetail(utilisateur);
         }
         Utilisateur utilisateur = utilisateurDAO.findByEmail(email);
