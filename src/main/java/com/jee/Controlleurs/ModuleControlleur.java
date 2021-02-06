@@ -44,6 +44,12 @@ public class ModuleControlleur {
         return new ResponseEntity<Module>(moduleGestionnaire.getModuleById(id_module), HttpStatus.OK);
     }
 
+    @GetMapping("/module/{id_professeur}")
+    @RolesAllowed({"PROFESSEUR"})
+    public ResponseEntity<?> getAllModuleByProfesseur(@PathVariable Long id_professeur){
+        return new ResponseEntity<Module>((Module) moduleGestionnaire.getAllModulesByProfesseur(id_professeur), HttpStatus.OK);
+    }
+
     @DeleteMapping("/supprimerModule/{id_module}")
     @RolesAllowed({"ADMINISTRATEUR"})
     public ResponseEntity<?> supprimerModule(@PathVariable Long id_module){

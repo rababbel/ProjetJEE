@@ -31,4 +31,8 @@ public class ModuleGestionnaire {
     public List<Module> getAllModules(){
         return (List<Module>) moduleDAO.findAll();
     }
+
+    public List<Module> getAllModulesByProfesseur(Long id_professeur){
+        return moduleDAO.getAllByProfesseur(id_professeur);
+    }
 }
