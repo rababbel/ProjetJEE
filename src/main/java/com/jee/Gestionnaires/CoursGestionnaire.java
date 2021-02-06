@@ -32,4 +32,7 @@ public class CoursGestionnaire {
     public List<Cours> getAllCours(){
         return (List<Cours>) coursDAO.findAll();
     }
+    public List<Cours> getAllCoursByModule(Long id_module){
+        return coursDAO.getAllByModule(id_module);
+    }
 }

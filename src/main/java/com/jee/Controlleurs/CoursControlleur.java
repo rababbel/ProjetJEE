@@ -23,6 +23,14 @@ public class CoursControlleur {
         Collection<Cours> cours = coursGestionnaire.getAllCours();
         return cours;
     }
+
+    @GetMapping("/cours/{id_module}")
+    @RolesAllowed({"ADMINISTRATEUR","PROFESSEUR"})
+    public Collection<Cours> getAllCoursByModule(@PathVariable Long id_module){
+        Collection<Cours> cours = coursGestionnaire.getAllCoursByModule(id_module);
+        return cours;
+    }
+
     @GetMapping("/cours/{id_cours}")
     @RolesAllowed({"ETUDIANT", "ADMINISTRATEUR"})
     public ResponseEntity<?> getCoursById(@PathVariable Long id_cours){
