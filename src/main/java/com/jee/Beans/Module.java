@@ -26,6 +26,11 @@ public class Module {
     @JoinColumn(nullable = true)
     private Semestre semestre;
 
+    @ManyToOne
+    @NotNull
+    @JoinColumn(nullable = true)
+    private Professeur professeur;
+
     @OneToMany(mappedBy = "etudiantModule.module")
     private List<Note_Absence> notes_absences = new ArrayList<Note_Absence>();
 

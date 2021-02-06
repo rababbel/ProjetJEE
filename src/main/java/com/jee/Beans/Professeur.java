@@ -1,10 +1,13 @@
 package com.jee.Beans;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @Entity
 public class Professeur extends Personne{
@@ -12,6 +15,10 @@ public class Professeur extends Personne{
     @NotNull
     @JoinColumn(nullable = true)
     private Departement departement;
+
+    @OneToMany(mappedBy = "professeur")
+    @JsonIgnore
+    private List<Module> liste_modules;
 
     public Professeur() {
 
