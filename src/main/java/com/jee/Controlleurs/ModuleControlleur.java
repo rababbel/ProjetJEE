@@ -12,6 +12,7 @@ import javax.validation.Valid;
 import java.util.Collection;
 
 @RestController
+@CrossOrigin("http://localhost:3000/")
 public class ModuleControlleur {
 
     @Autowired
@@ -44,10 +45,19 @@ public class ModuleControlleur {
         return new ResponseEntity<Module>(moduleGestionnaire.getModuleById(id_module), HttpStatus.OK);
     }
 
-    @GetMapping("/module/{id_professeur}")
+    @GetMapping("/modulesProf/{id_professeur}")
     @RolesAllowed({"PROFESSEUR"})
-    public ResponseEntity<?> getAllModuleByProfesseur(@PathVariable Long id_professeur){
-        return new ResponseEntity<Module>((Module) moduleGestionnaire.getAllModulesByProfesseur(id_professeur), HttpStatus.OK);
+    public Collection<Module> getAllModuleByProfesseur(@PathVariable Long id_professeur){
+        Collection<Module> modules = moduleGestionnaire.getAllModulesByProfesseur(id_professeur);
+        return modules;
+
+    }
+
+    @GetMapping("/modulesEtudiant/{id_semestre}")
+    @RolesAllowed({"ETUDIANT"})
+    public Collection<Module> getAllModulesBySemestre(@PathVariable Long id_semestre){
+        Collection<Module> modules = moduleGestionnaire.getAllModulesBySemestre(id_semestre);
+        return modules;
     }
 
     @DeleteMapping("/supprimerModule/{id_module}")
