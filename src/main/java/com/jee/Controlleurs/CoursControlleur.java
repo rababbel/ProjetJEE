@@ -26,7 +26,7 @@ public class CoursControlleur {
     }
 
     @GetMapping("/Modulecours/{id_module}")
-    @RolesAllowed({"ADMINISTRATEUR","PROFESSEUR"})
+    @RolesAllowed({"ADMINISTRATEUR","ETUDIANT"})
     public Collection<Cours> getAllCoursByModule(@PathVariable Long id_module){
         Collection<Cours> cours = coursGestionnaire.getAllCoursByModule(id_module);
         return cours;

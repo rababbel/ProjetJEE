@@ -5,7 +5,9 @@ import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Module {
@@ -30,10 +32,10 @@ public class Module {
     @NotNull
     @JoinColumn(nullable = true)
     private Professeur professeur;
-
-    @OneToMany(mappedBy = "etudiantModule.module")
-    private List<Note_Absence> notes_absences = new ArrayList<Note_Absence>();
-
+    /*
+    @OneToMany(mappedBy = "module")
+    private Set<Note_Absence> notes_absences = new HashSet<Note_Absence>();
+    */
     public Module() {
 
     }
@@ -77,12 +79,19 @@ public class Module {
         this.semestre = semestre;
     }
 
-    public List<Note_Absence> getNotes_absences() {
+    public Professeur getProfesseur() {
+        return professeur;
+    }
+
+    public void setProfesseur(Professeur professeur) {
+        this.professeur = professeur;
+    }
+    /*
+    public Set<Note_Absence> getNotes_absences() {
         return notes_absences;
     }
 
-    public void setNotes_absences(List<Note_Absence> notes_absences) {
+    public void setNotes_absences(Set<Note_Absence> notes_absences) {
         this.notes_absences = notes_absences;
-    }
-
+    }*/
 }
