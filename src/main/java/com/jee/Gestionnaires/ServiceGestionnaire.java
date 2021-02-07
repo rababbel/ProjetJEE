@@ -31,7 +31,4 @@ public class ServiceGestionnaire {
         return (List<com.jee.Beans.Service>) serviceDAO.findAll();
     }
 
-    public List<com.jee.Beans.Service> getAllByUtilisateur(Long id_utilisateur){
-        return serviceDAO.getAllByUtilisateur(id_utilisateur);
-    }
 }

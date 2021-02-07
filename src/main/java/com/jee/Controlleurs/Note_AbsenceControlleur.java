@@ -14,7 +14,6 @@ import java.util.Collection;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
 public class Note_AbsenceControlleur {
 
     @Autowired

@@ -12,7 +12,6 @@ import javax.validation.Valid;
 import java.util.Collection;
 
 @RestController
-@CrossOrigin(origins = "*")
 public class CoursControlleur {
 
     @Autowired

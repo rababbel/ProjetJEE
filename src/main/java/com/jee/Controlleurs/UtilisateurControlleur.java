@@ -17,7 +17,6 @@ import java.util.Collection;
 import static com.jee.Beans.ROLE.*;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
 public class UtilisateurControlleur {
     @Autowired
     private UtilisateurGestionnaire utilisateurGestionnaire;

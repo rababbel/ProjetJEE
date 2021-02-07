@@ -12,7 +12,6 @@ import javax.validation.Valid;
 import java.util.Collection;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
 public class ServiceControlleur {
 
     @Autowired
@@ -36,13 +35,6 @@ public class ServiceControlleur {
     @RolesAllowed({"ADMINISTRATEUR"})
     public Collection<Service> getAllServices(){
         Collection<Service> services = serviceGestionnaire.getAllService();
-        return services;
-    }
-
-    @GetMapping("/services/{id_utilisateur}")
-    @RolesAllowed({"ADMINISTRATEUR","ETUDIANT"})
-    public Collection<Service> getAllByUtilisateur(@PathVariable Long id_utilisateur){
-        Collection<Service> services = serviceGestionnaire.getAllByUtilisateur(id_utilisateur);
         return services;
     }
 

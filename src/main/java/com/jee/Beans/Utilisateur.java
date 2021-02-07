@@ -1,7 +1,5 @@
 package com.jee.Beans;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +15,6 @@ public class Utilisateur extends Personne{
 
     @OneToMany(mappedBy = "etudiantModule.utilisateur")
     private List<Note_Absence> notes_absences = new ArrayList<Note_Absence>();
-
-    @OneToMany(mappedBy = "utilisateur")
-    @JsonIgnore
-    private List<Service> liste_services;
 
     public Utilisateur() {
         super();
@@ -56,11 +50,4 @@ public class Utilisateur extends Personne{
         this.notes_absences = notes_absences;
     }
 
-    public List<Service> getListe_services() {
-        return liste_services;
-    }
-
-    public void setListe_services(List<Service> liste_services) {
-        this.liste_services = liste_services;
-    }
 }
