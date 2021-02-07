@@ -14,6 +14,12 @@ public class Service {
     @Column(nullable = false)
     private String description;
 
+    @Column
+    private String reponse;
+
+    @Column
+    private boolean accepte;
+
     @ManyToOne
     @NotNull
     @JoinColumn(nullable = true)
@@ -23,9 +29,10 @@ public class Service {
 
     }
 
-    public Service(Long id_service, String description) {
+    public Service(Long id_service, String description, Utilisateur utilisateur) {
         this.id_service = id_service;
         this.description = description;
+        this.utilisateur = utilisateur;
     }
 
     public Long getId_service() {
@@ -50,5 +57,21 @@ public class Service {
 
     public void setUtilisateur(Utilisateur utilisateur) {
         this.utilisateur = utilisateur;
+    }
+
+    public String getReponse() {
+        return reponse;
+    }
+
+    public void setReponse(String reponse) {
+        this.reponse = reponse;
+    }
+
+    public boolean isAccepte() {
+        return accepte;
+    }
+
+    public void setAccepte(boolean accepte) {
+        this.accepte = accepte;
     }
 }
