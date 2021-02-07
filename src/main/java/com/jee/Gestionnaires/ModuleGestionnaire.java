@@ -37,6 +37,6 @@ public class ModuleGestionnaire {
     }
 
     public List<Module> getAllModulesBySemestre(Long id_semestre){
-        return moduleDAO.getAllBySemestre(id_semestre);
+        return moduleDAO.getAllBySemeste(id_semestre);
     }
 }

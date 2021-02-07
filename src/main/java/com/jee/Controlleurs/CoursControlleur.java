@@ -12,6 +12,7 @@ import javax.validation.Valid;
 import java.util.Collection;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class CoursControlleur {
 
     @Autowired
@@ -24,7 +25,7 @@ public class CoursControlleur {
         return cours;
     }
 
-    @GetMapping("/cours/{id_module}")
+    @GetMapping("/Modulecours/{id_module}")
     @RolesAllowed({"ADMINISTRATEUR","PROFESSEUR"})
     public Collection<Cours> getAllCoursByModule(@PathVariable Long id_module){
         Collection<Cours> cours = coursGestionnaire.getAllCoursByModule(id_module);

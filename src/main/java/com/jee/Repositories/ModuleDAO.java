@@ -13,5 +13,5 @@ public interface ModuleDAO extends CrudRepository<Module, Long> {
     List<Module> getAllByProfesseur(Long id_professeur);
 
     @Query("select m from Module m where m.semestre.id_semestre = ?1")
-    List<Module> getAllBySemestre(Long id_semestre);
+    List<Module> getAllBySemeste(Long id_semestre);
 }

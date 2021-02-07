@@ -12,7 +12,7 @@ import javax.validation.Valid;
 import java.util.Collection;
 
 @RestController
-@CrossOrigin("http://localhost:3000/")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ModuleControlleur {
 
     @Autowired
@@ -50,12 +50,11 @@ public class ModuleControlleur {
     public Collection<Module> getAllModuleByProfesseur(@PathVariable Long id_professeur){
         Collection<Module> modules = moduleGestionnaire.getAllModulesByProfesseur(id_professeur);
         return modules;
-
     }
 
     @GetMapping("/modulesEtudiant/{id_semestre}")
     @RolesAllowed({"ETUDIANT"})
-    public Collection<Module> getAllModulesBySemestre(@PathVariable Long id_semestre){
+    public Collection<Module> getAllModuleBySemestre(@PathVariable Long id_semestre){
         Collection<Module> modules = moduleGestionnaire.getAllModulesBySemestre(id_semestre);
         return modules;
     }
