@@ -61,7 +61,7 @@ public class Edt {
         return chemin;
     }
 
-    public void setChemin(String chemin) {
+    public void setChemin(String chein) {
         this.chemin = chemin;
     }
 }

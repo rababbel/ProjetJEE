@@ -12,6 +12,7 @@ import javax.validation.Valid;
 import java.util.Collection;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class EdtControlleur {
     @Autowired
     private EdtGestionnaire edtGestionnaire;
@@ -43,6 +44,7 @@ public class EdtControlleur {
         return edts;
     }
 
+    @RolesAllowed({"ADMINISTRATEUR"})
     public ResponseEntity<?> supprimerEdt(@PathVariable Long idEdt){
         edtGestionnaire.supprimerEdt(idEdt);
         return new ResponseEntity<>("Emploi du temps supprimer avec succes", HttpStatus.OK);

@@ -14,6 +14,11 @@ public class Service {
     @Column(nullable = false)
     private String description;
 
+    @ManyToOne
+    @NotNull
+    @JoinColumn(nullable = true)
+    private Utilisateur utilisateur;
+
     public Service() {
 
     }
@@ -37,5 +42,13 @@ public class Service {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
+    }
+
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
     }
 }
