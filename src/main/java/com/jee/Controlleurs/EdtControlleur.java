@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import java.util.Collection;
+import java.util.HashMap;
 
 @RestController
 public class EdtControlleur {
@@ -18,9 +19,9 @@ public class EdtControlleur {
 
     @PostMapping("/ajouterEdt")
     @RolesAllowed({"ADMINISTRATEUR"})
-    public ResponseEntity<?> ajouterEdt(@Valid @RequestBody Edt edt){
-        edtGestionnaire.ajouterEdt(edt);
-        return new ResponseEntity<>(edt, HttpStatus.OK);
+    public ResponseEntity<?> ajouterEdt(@Valid @RequestBody HashMap<String,Object> map){
+        edtGestionnaire.ajouterEdt(map);
+        return new ResponseEntity<>("emploi du temps ajouter avec succes", HttpStatus.OK);
     }
 
     @PostMapping("/modifierEdt")

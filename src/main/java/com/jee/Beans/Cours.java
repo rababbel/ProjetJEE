@@ -34,10 +34,6 @@ public class Cours {
         this.module = module;
     }
 
-    public Cours(String titre){
-        this.titre = titre;
-    }
-
     public Long getId_cours() {
         return id_cours;
     }
