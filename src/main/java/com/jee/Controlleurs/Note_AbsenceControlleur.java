@@ -1,6 +1,5 @@
 package com.jee.Controlleurs;
 
-import com.jee.Beans.EtudiantModule;
 import com.jee.Beans.Note_Absence;
 import com.jee.Gestionnaires.Note_AbsenceGestionnaire;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import java.util.Collection;
-import java.util.Optional;
 
 @RestController
 public class Note_AbsenceControlleur {
@@ -48,10 +46,16 @@ public class Note_AbsenceControlleur {
         return note_absences;
     }
 
-    @DeleteMapping("/supprimerNoteAbsence/{etudiantModule}")
+    @GetMapping("/noteAbsence")
+    public Collection<Note_Absence> getAllNoteAbsence(){
+        Collection<Note_Absence> note_absences = note_absenceGestionnaire.getAll();
+        return note_absences;
+    }
+
+    @DeleteMapping("/supprimerNoteAbsence/{id_note_absence}")
     @RolesAllowed({"ADMINISTRATEUR"})
-    public ResponseEntity<?> supprimerNoteAbsence(EtudiantModule etudiantModule){
-        note_absenceGestionnaire.deleteNoteAbsence(etudiantModule);
+    public ResponseEntity<?> supprimerNoteAbsence(Long id_note_absence){
+        note_absenceGestionnaire.deleteNoteAbsence(id_note_absence);
         return new ResponseEntity<>("Suppression avec succes", HttpStatus.OK);
     }
 
