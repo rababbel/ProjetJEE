@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
 import java.util.Collection;
+import java.util.HashMap;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -40,9 +42,11 @@ public class CoursControlleur {
 
     @PostMapping("/ajouterCours")
     @RolesAllowed({"ADMINISTRATEUR"})
-    public ResponseEntity<?> ajouterCours(@Valid @RequestBody Cours cours){
-        coursGestionnaire.ajouterCours(cours);
-        return new ResponseEntity<>(cours,HttpStatus.OK);
+    public ResponseEntity<?> ajouterCours(@Valid @RequestBody HashMap<String,Object> map){
+
+
+        coursGestionnaire.ajouterCours(map);
+        return new ResponseEntity<>("cours ajouter avec succes",HttpStatus.OK);
     }
 
     @PutMapping("/modifierCours")
