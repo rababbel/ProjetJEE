@@ -27,7 +27,7 @@ public class Utilisateur extends Personne{
         super();
     }
 
-    public Utilisateur(Long id, String nom, String prenom, String email, String tel, String password, ROLE ROLE) {
+    public Utilisateur(Long id, String nom, String prenom, String email, String tel, String password, ROLE role) {
         super(id, nom, prenom, email, tel);
         this.password = password;
         this.role = role;

@@ -33,7 +33,7 @@ public class UtilisateurControlleur {
         utilisateur.setPassword(passwordEncoder.encode(utilisateur.getPassword()));
         if (utilisateur.getRole() == ROLE_PROFESSEUR && professeurGestionnaire.isExistByEmail(utilisateur.getEmail())){
             utilisateurGestionnaire.ajouterUtilisateur(utilisateur);
-        }else if (utilisateur.getRole() == ROLE_ETUDIANT || utilisateur.getRole() == ROLE_ADMINISTRATEUR){
+        }else if (utilisateur.getRole() == ROLE_ETUDIANT){
             utilisateurGestionnaire.ajouterUtilisateur(utilisateur);
         }else {
             return new ResponseEntity<>("Professeur n'existe pas ", HttpStatus.NOT_ACCEPTABLE);

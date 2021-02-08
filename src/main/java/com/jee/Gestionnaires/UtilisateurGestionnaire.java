@@ -1,6 +1,7 @@
 package com.jee.Gestionnaires;
 
 import com.jee.Beans.Utilisateur;
+import com.jee.Exceptions.UserAlreadyExisteException;
 import com.jee.Repositories.UtilisateurDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +18,8 @@ public class UtilisateurGestionnaire {
     private UtilisateurDAO utilisateurDAO;
 
     public void ajouterUtilisateur(Utilisateur utilisateur){
+        if(utilisateurDAO.findByEmail(utilisateur.getEmail()) != null)
+            throw new UserAlreadyExisteException("un utilisateur avec le meme email existe deja");
         utilisateurDAO.save(utilisateur);
     }
 
