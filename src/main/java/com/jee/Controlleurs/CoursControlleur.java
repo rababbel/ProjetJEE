@@ -1,5 +1,6 @@
 package com.jee.Controlleurs;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.jee.Beans.Cours;
 import com.jee.Gestionnaires.CoursGestionnaire;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,7 @@ import java.util.Collection;
 import java.util.HashMap;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 public class CoursControlleur {
 
     @Autowired
@@ -42,21 +43,22 @@ public class CoursControlleur {
 
     @PostMapping("/ajouterCours")
     @RolesAllowed({"ADMINISTRATEUR"})
-    public ResponseEntity<?> ajouterCours(@Valid @RequestBody HashMap<String,Object> map){
-
-
-        coursGestionnaire.ajouterCours(map);
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public ResponseEntity<?> ajouterCours(@RequestParam (value = "file") MultipartFile file, @RequestParam("idModule") Long idModule, @RequestParam("titre") String titre){
+        coursGestionnaire.ajouterCours(file,idModule, titre);
         return new ResponseEntity<>("cours ajouter avec succes",HttpStatus.OK);
     }
 
+
     @PutMapping("/modifierCours")
     @RolesAllowed({"ADMINISTRATEUR"})
-    public ResponseEntity<?> modifierCours(@Valid @RequestBody Cours cours){
-        coursGestionnaire.modifierCours(cours);
-        return new ResponseEntity<>(cours,HttpStatus.OK);
+    @JsonIgnoreProperties(ignoreUnknown = true)
+    public ResponseEntity<?> modifierCours(@RequestParam (value = "file", required = false) MultipartFile file, @RequestParam("idModule") Long idModule, @RequestParam("titre") String titre, @RequestParam("id_cours") Long idCours){
+        coursGestionnaire.modifierCours(file,idModule,titre,idCours);
+        return new ResponseEntity<>("cours modifie avec succes",HttpStatus.OK);
     }
 
-    @DeleteMapping("/supprimerCours/{id_cours}")
+        @DeleteMapping("/supprimerCours/{id_cours}")
     @RolesAllowed({"ADMINISTRATEUR"})
     public ResponseEntity<?> supprimerCours(@PathVariable Long id_cours){
         coursGestionnaire.supprimerCours(id_cours);

@@ -6,6 +6,7 @@ import com.jee.Beans.Edt;
 import com.jee.Beans.Module;
 import com.jee.Exceptions.FileAdditionFailedException;
 import com.jee.Repositories.EdtDAO;
+import com.jee.Utils.UtilMethodes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -30,28 +31,17 @@ public class EdtGestionnaire {
     public void ajouterEdt(HashMap<String,Object> map)
     {
         ObjectMapper om = new ObjectMapper();
-        MultipartFile file = (MultipartFile) map.get("file");
+        MultipartFile file = (map.get("file") != null) ? (MultipartFile) map.get("file") : null;
 
-        map.remove("file");
-
-        File fichier = new File(uploadDir,file.getOriginalFilename());
-        Path chemin = Paths.get(fichier.getAbsolutePath());
-        try{
-            Files.write(chemin,file.getBytes());
-        }
-        catch (IOException e){
-            throw new FileAdditionFailedException("fichier n’a pas pu être enregistré ");
-        }
-
+        if(file != null ) map.remove("file");
         Edt edt = om.convertValue(map,Edt.class);
-        edt.setChemin(fichier.getAbsolutePath());
+        if(file != null){
+            String absoultePath = UtilMethodes.sauvegarderFichier(file);
+            edt.setChemin(absoultePath);
+        }
         edtDAO.save(edt);
 
     }
-    public void modifierEdt(@Valid Edt edt){
-        edtDAO.save(edt);
-    }
-
     public Optional<Edt> getEdtByIdEdt(Long idEdt){
         return edtDAO.findById(idEdt);
     }

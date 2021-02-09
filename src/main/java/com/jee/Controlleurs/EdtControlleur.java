@@ -26,9 +26,9 @@ public class EdtControlleur {
 
     @PostMapping("/modifierEdt")
     @RolesAllowed({"ADMINISTRATEUR"})
-    public ResponseEntity<?> modifierEdt(@Valid @RequestBody Edt edt){
-        edtGestionnaire.modifierEdt(edt);
-        return new ResponseEntity<>(edt, HttpStatus.OK);
+    public ResponseEntity<?> modifierEdt(@Valid @RequestBody HashMap<String,Object> map){
+        edtGestionnaire.ajouterEdt(map);
+        return new ResponseEntity<>("emploi du temps modifier avec succes", HttpStatus.OK);
     }
 
     @GetMapping("/edt/{idEdt}")
