@@ -29,6 +29,7 @@ public class ProfesseurGestionnaire {
     }
 
     public Professeur getProfesseurByEmail(String email){
+        System.out.println(professeurDAO.getProfesseurByEmail(email));
         return professeurDAO.getProfesseurByEmail(email);
     }
 }
