@@ -27,4 +27,8 @@ public class ProfesseurGestionnaire {
     public boolean isExistByEmail(String email){
         return professeurDAO.existsByEmail(email);
     }
+
+    public Professeur getProfesseurByEmail(String email){
+        return professeurDAO.getProfesseurByEmail(email);
+    }
 }
