@@ -13,6 +13,7 @@ import java.util.Collection;
 
 @RestController
 @CrossOrigin(origins = "*")
+
 public class ServiceControlleur {
 
     @Autowired
