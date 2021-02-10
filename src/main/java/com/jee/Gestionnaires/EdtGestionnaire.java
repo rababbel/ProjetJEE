@@ -28,20 +28,29 @@ public class EdtGestionnaire {
 
     private  String uploadDir = System.getProperty("user.dir")+"/uploadedDocs";
 
-    public void ajouterEdt(HashMap<String,Object> map)
+    public void ajouterEdt(MultipartFile file, String titre, String saison)
     {
-        ObjectMapper om = new ObjectMapper();
-        MultipartFile file = (map.get("file") != null) ? (MultipartFile) map.get("file") : null;
-
-        if(file != null ) map.remove("file");
-        Edt edt = om.convertValue(map,Edt.class);
+        Edt edt = new Edt();
+        edt.setSaison(saison);
         if(file != null){
             String absoultePath = UtilMethodes.sauvegarderFichier(file);
             edt.setChemin(absoultePath);
         }
+        edt.setTitre(titre);
         edtDAO.save(edt);
 
     }
+    public  void modifierEdt(MultipartFile file, String titre, String saison, Long idEdt){
+        Edt edt = edtDAO.findById(idEdt).orElse(null);
+        edt.setSaison(saison);
+        if(file != null){
+            String absoultePath = UtilMethodes.sauvegarderFichier(file);
+            edt.setChemin(absoultePath);
+        }
+        edt.setTitre(titre);
+        edtDAO.save(edt);
+    }
+
     public Optional<Edt> getEdtByIdEdt(Long idEdt){
         return edtDAO.findById(idEdt);
     }

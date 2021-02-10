@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
@@ -13,21 +14,22 @@ import java.util.Collection;
 import java.util.HashMap;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class EdtControlleur {
     @Autowired
     private EdtGestionnaire edtGestionnaire;
 
     @PostMapping("/ajouterEdt")
     @RolesAllowed({"ADMINISTRATEUR"})
-    public ResponseEntity<?> ajouterEdt(@Valid @RequestBody HashMap<String,Object> map){
-        edtGestionnaire.ajouterEdt(map);
+    public ResponseEntity<?> ajouterEdt(@RequestParam (value = "file") MultipartFile file, @RequestParam("titre") String titre, @RequestParam("saison") String saison){
+        edtGestionnaire.ajouterEdt(file,titre,saison);
         return new ResponseEntity<>("emploi du temps ajouter avec succes", HttpStatus.OK);
     }
 
-    @PostMapping("/modifierEdt")
+    @PutMapping("/modifierEdt")
     @RolesAllowed({"ADMINISTRATEUR"})
-    public ResponseEntity<?> modifierEdt(@Valid @RequestBody HashMap<String,Object> map){
-        edtGestionnaire.ajouterEdt(map);
+    public ResponseEntity<?> modifierEdt(@RequestParam (value = "file", required = false) MultipartFile file, @RequestParam("titre") String titre, @RequestParam("saison") String saison, @RequestParam("idEdt") Long idEdt){
+        edtGestionnaire.modifierEdt(file,titre,saison,idEdt);
         return new ResponseEntity<>("emploi du temps modifier avec succes", HttpStatus.OK);
     }
 
@@ -44,6 +46,7 @@ public class EdtControlleur {
         return edts;
     }
 
+    @DeleteMapping("/supprimerEdt/{idEdt}")
     public ResponseEntity<?> supprimerEdt(@PathVariable Long idEdt){
         edtGestionnaire.supprimerEdt(idEdt);
         return new ResponseEntity<>("Emploi du temps supprimer avec succes", HttpStatus.OK);

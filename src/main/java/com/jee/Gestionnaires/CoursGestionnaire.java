@@ -32,8 +32,7 @@ public class CoursGestionnaire {
 
     public void ajouterCours(MultipartFile file, Long idModule, String titre)
     {
-        System.out.println(idModule);
-        System.out.println(titre);
+
         Cours cours = new Cours();
         if(file != null){
             String absoultePath = UtilMethodes.sauvegarderFichier(file);

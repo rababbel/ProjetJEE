@@ -18,15 +18,23 @@ public class Service {
     private String reponse;
 
     @Column
-    private boolean accepte;
+    private String etat;
 
     @ManyToOne
     @NotNull
-    @JoinColumn(nullable = true)
+    @JoinColumn(nullable = false)
     private Utilisateur utilisateur;
 
     public Service() {
 
+    }
+
+    public String getEtat() {
+        return etat;
+    }
+
+    public void setEtat(String etat) {
+        this.etat = etat;
     }
 
     public Service(Long id_service, String description, Utilisateur utilisateur) {
@@ -67,11 +75,4 @@ public class Service {
         this.reponse = reponse;
     }
 
-    public boolean isAccepte() {
-        return accepte;
-    }
-
-    public void setAccepte(boolean accepte) {
-        this.accepte = accepte;
-    }
 }
